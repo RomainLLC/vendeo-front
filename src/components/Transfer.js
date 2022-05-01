@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Form, Input, Grid, Label, Icon, Dropdown } from 'semantic-ui-react'
-import { TxButton } from './substrate-lib/components'
-import { useSubstrateState } from './substrate-lib'
+import { Form, Input, Grid, Dropdown } from 'semantic-ui-react'
+import { TxButton } from '../substrate-lib/components'
+import { useSubstrateState } from '../substrate-lib'
 
 export default function Main(props) {
   const [status, setStatus] = useState(null)
@@ -26,25 +26,12 @@ export default function Main(props) {
 
   return (
     <Grid.Column width={8}>
-      <h1>Transfer</h1>
+      <h1>Virement</h1>
       <Form>
-        <Form.Field>
-          <Label basic color="teal">
-            <Icon name="hand point right" />1 Unit = 1000000000000&nbsp;
-          </Label>
-          <Label
-            basic
-            color="teal"
-            style={{ marginLeft: 0, marginTop: '.5em' }}
-          >
-            <Icon name="hand point right" />
-            Transfer more than the existential amount for account with 0 balance
-          </Label>
-        </Form.Field>
 
         <Form.Field>
           <Dropdown
-            placeholder="Select from available addresses"
+            placeholder="Selectionnez parmi les adresses"
             fluid
             selection
             search
@@ -57,9 +44,9 @@ export default function Main(props) {
         <Form.Field>
           <Input
             fluid
-            label="To"
+            label="Vers"
             type="text"
-            placeholder="address"
+            placeholder="adresse"
             value={addressTo}
             state="addressTo"
             onChange={onChange}
@@ -68,7 +55,7 @@ export default function Main(props) {
         <Form.Field>
           <Input
             fluid
-            label="Amount"
+            label="Montant"
             type="number"
             state="amount"
             onChange={onChange}
@@ -76,7 +63,7 @@ export default function Main(props) {
         </Form.Field>
         <Form.Field style={{ textAlign: 'center' }}>
           <TxButton
-            label="Submit"
+            label="Envoyer"
             type="SIGNED-TX"
             setStatus={setStatus}
             attrs={{

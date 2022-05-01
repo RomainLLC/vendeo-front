@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Table, Grid, Button, Label } from 'semantic-ui-react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { useSubstrateState } from './substrate-lib'
+import { useSubstrateState } from '../substrate-lib'
+import {formatBalance } from '@polkadot/util'
 
 export default function Main(props) {
   const { api, keyring } = useSubstrateState()
@@ -17,7 +18,12 @@ export default function Main(props) {
         const balancesMap = addresses.reduce(
           (acc, address, index) => ({
             ...acc,
-            [address]: balances[index].data.free.toHuman(),
+           // [address]: balances[index].data.free.toHuman(),
+           [address]: formatBalance(
+            balances[index].data.free,
+            { withSi: false, forceUnit: '-' },
+            11 // TODO : use api.registry.chainDecimals ?
+        )
           }),
           {}
         )
@@ -33,20 +39,20 @@ export default function Main(props) {
 
   return (
     <Grid.Column>
-      <h1>Balances</h1>
+      <h1>Portefeuilles</h1>
       {accounts.length === 0 ? (
         <Label basic color="yellow">
-          No accounts to be shown
+          PAs de compte trouvé.
         </Label>
       ) : (
         <Table celled striped size="small">
           <Table.Body>
             <Table.Row>
               <Table.Cell width={3} textAlign="right">
-                <strong>Name</strong>
+                <strong>Nom</strong>
               </Table.Cell>
               <Table.Cell width={10}>
-                <strong>Address</strong>
+                <strong>Adresse</strong>
               </Table.Cell>
               <Table.Cell width={3}>
                 <strong>Balance</strong>

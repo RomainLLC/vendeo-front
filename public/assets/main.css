@@ -6,3 +6,31 @@
   font-size: 2.4rem !important;
   line-height: 4rem !important;
 }
+
+/* BODY */
+#vendeo-body {
+  padding: 0;
+}
+
+
+/* HEADER */
+#vendeo-header {
+  background :url("./img/pexels-uzunov-rostislav-5011647.jpg") center center no-repeat transparent;
+  background-size: cover;
+  padding: 3rem;
+  min-height: 60vh;
+  margin-bottom: 2.5rem;
+}
+
+#vendeo-header h1 {
+  color: #fff;
+  text-align: center;
+  padding: 0 15%;
+  margin: 7vh 0;
+  font-size: 2.5rem;
+  text-shadow: 0 0 3px rgba(0,0,0,.7);
+}
+
+#vendeo-header .ui.card {
+  background: rgba(255,255,255,.85);
+}

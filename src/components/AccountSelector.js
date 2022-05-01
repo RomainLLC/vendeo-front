@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import {formatBalance } from '@polkadot/util'
 
 import {
   Menu,
@@ -11,7 +12,7 @@ import {
   Label,
 } from 'semantic-ui-react'
 
-import { useSubstrate, useSubstrateState } from './substrate-lib'
+import { useSubstrate, useSubstrateState } from '../substrate-lib'
 
 const CHROME_EXT_URL =
   'https://chrome.google.com/webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd'
@@ -63,14 +64,14 @@ function Main(props) {
       <Container>
         <Menu.Menu>
           <Image
-            src={`${process.env.PUBLIC_URL}/assets/substrate-logo.png`}
-            size="mini"
+            src={`${process.env.PUBLIC_URL}/assets/vendeo-logo.png`}
+            size="small"
           />
         </Menu.Menu>
         <Menu.Menu position="right" style={{ alignItems: 'center' }}>
           {!currentAccount ? (
             <span>
-              Create an account with Polkadot-JS Extension (
+              Créez un compte avec Polkadot-JS Extension (
               <a target="_blank" rel="noreferrer" href={CHROME_EXT_URL}>
                 Chrome
               </a>
@@ -120,7 +121,13 @@ function BalanceAnnotation(props) {
     currentAccount &&
       api.query.system
         .account(acctAddr(currentAccount), balance =>
-          setAccountBalance(balance.data.free.toHuman())
+          setAccountBalance(
+            formatBalance(
+              balance.data.free,
+              { withSi: false, forceUnit: '-' },
+              11 // TODO : use api.registry.chainDecimals ?
+          )
+          )
         )
         .then(unsub => (unsubscribe = unsub))
         .catch(console.error)

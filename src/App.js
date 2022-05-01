@@ -11,17 +11,16 @@ import 'semantic-ui-css/semantic.min.css'
 
 import { SubstrateContextProvider, useSubstrateState } from './substrate-lib'
 import { DeveloperConsole } from './substrate-lib/components'
-
-import AccountSelector from './AccountSelector'
-import Balances from './Balances'
-import BlockNumber from './BlockNumber'
-import Events from './Events'
-import Interactor from './Interactor'
-import Metadata from './Metadata'
-import NodeInfo from './NodeInfo'
-import TemplateModule from './TemplateModule'
-import Transfer from './Transfer'
-import Upgrade from './Upgrade'
+import AccountSelector from './components/AccountSelector'
+import Balances from './components/Balances'
+import BlockNumber from './components/BlockNumber'
+import Events from './components/Events'
+import Interactor from './components/Interactor'
+import Metadata from './components/Metadata'
+import NodeInfo from './components/NodeInfo'
+// import TemplateModule from './components/TemplateModule'
+import Transfer from './components/Transfer'
+// import Upgrade from './components/Upgrade'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -39,7 +38,7 @@ function Main() {
           negative
           compact
           floating
-          header="Error Connecting to Substrate"
+          header="Error Connecting to Vendeo chain"
           content={`Connection to websocket '${errObj.target.url}' failed.`}
         />
       </Grid.Column>
@@ -47,7 +46,7 @@ function Main() {
   )
 
   if (apiState === 'ERROR') return message(apiError)
-  else if (apiState !== 'READY') return loader('Connecting to Substrate')
+  else if (apiState !== 'READY') return loader('Connecting to Vendeo chain')
 
   if (keyringState !== 'READY') {
     return loader(
@@ -58,11 +57,48 @@ function Main() {
   const contextRef = createRef()
 
   return (
-    <div ref={contextRef}>
-      <Sticky context={contextRef}>
-        <AccountSelector />
-      </Sticky>
+    <div ref={contextRef} class="ui grid center aligned">
+      <div class="ui externally celled grid">
+            <div id="vendeo-body" class="sixteen wide column centered">
+            <Sticky context={contextRef}>
+              <AccountSelector />
+            </Sticky>
+        <div id="vendeo-header" class="sixteen wide column ad centered" data-text="Top Banner">
+          <Container>
+        <Grid stackable columns="equal">
+        <Grid.Row stretched>
+          <h1>Expérimentation d'une monnaie locale numérique basée sur la technologie blockchain.</h1>
+          </Grid.Row>
+          <Grid.Row stretched>
+            <NodeInfo />
+            <Metadata />
+            <BlockNumber />
+            <BlockNumber finalized />
+          </Grid.Row>
+          </Grid>
+        </Container>
+        </div>
+
+        <Container>
+        <Grid stackable columns="equal">
+          <Grid.Row stretched>
+          <Balances />
+          </Grid.Row>
+          <Grid.Row stretched>
+          <Transfer />
+          </Grid.Row>
+          <Grid.Row>
+            <Interactor />
+            <Events />
+          </Grid.Row>
+
+          </Grid>
+        </Container>
+        <DeveloperConsole />
+      {/* <Grid celled padded style={{with: '100vw'}}>
+
       <Container>
+
         <Grid stackable columns="equal">
           <Grid.Row stretched>
             <NodeInfo />
@@ -87,6 +123,9 @@ function Main() {
         </Grid>
       </Container>
       <DeveloperConsole />
+      </Grid> */}
+            </div>
+        </div>
     </div>
   )
 }
