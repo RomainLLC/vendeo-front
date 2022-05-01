@@ -21,6 +21,7 @@ import NodeInfo from './components/NodeInfo'
 // import TemplateModule from './components/TemplateModule'
 import Transfer from './components/Transfer'
 // import Upgrade from './components/Upgrade'
+import NftCollections from './components/NftCollections'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -90,6 +91,9 @@ function Main() {
           <Grid.Row>
             <Interactor />
             <Events />
+          </Grid.Row>
+          <Grid.Row>
+            <NftCollections />
           </Grid.Row>
 
           </Grid>
