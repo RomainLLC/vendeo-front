@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {formatBalance } from '@polkadot/util'
+import HeaderMenu from './utils/HeaderMenu'
+
 
 import {
   Menu,
@@ -68,6 +70,7 @@ function Main(props) {
             size="small"
           />
         </Menu.Menu>
+        <HeaderMenu />
         <Menu.Menu position="right" style={{ alignItems: 'center' }}>
           {!currentAccount ? (
             <span>
@@ -143,7 +146,7 @@ function BalanceAnnotation(props) {
   ) : null
 }
 
-export default function AccountSelector(props) {
+export default function Header(props) {
   const { api, keyring } = useSubstrateState()
   return keyring.getPairs && api.query ? <Main {...props} /> : null
 }

@@ -85,7 +85,7 @@ export default function Main(props) {
 
                     <div className="qr-popup centered">
                   <h5>Présentez ce code pour recevoir des fonds depuis un client mobile</h5>
-                  <p><Icon name="arrow down" size="big" /></p>
+                  <p><Icon name="arrow down" size="big" color="blue" /></p>
                   <QRCode value={account.address} />
                     </div>
                   </Segment>
