@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Grid, Button, Label } from 'semantic-ui-react'
+import { Table, Grid, Button, Label, Popup, Icon, Segment } from 'semantic-ui-react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import QRCode from "react-qr-code";
+
 import { useSubstrateState } from '../substrate-lib'
 import {formatBalance } from '@polkadot/util'
 
@@ -39,10 +41,10 @@ export default function Main(props) {
 
   return (
     <Grid.Column>
-      <h1>Portefeuilles</h1>
+      <h1>Vos comptes</h1>
       {accounts.length === 0 ? (
         <Label basic color="yellow">
-          PAs de compte trouvé.
+          Pas de compte trouvé.
         </Label>
       ) : (
         <Table celled striped size="small">
@@ -52,7 +54,7 @@ export default function Main(props) {
                 <strong>Nom</strong>
               </Table.Cell>
               <Table.Cell width={10}>
-                <strong>Adresse</strong>
+                <strong>N° de compte (addresse)</strong>
               </Table.Cell>
               <Table.Cell width={3}>
                 <strong>Balance</strong>
@@ -77,6 +79,32 @@ export default function Main(props) {
                       icon="copy outline"
                     />
                   </CopyToClipboard>
+                  <Popup 
+                  content={
+                    <Segment basic textAlign={"center"}>
+
+                    <div className="qr-popup centered">
+                  <h5>Présentez ce code pour recevoir des fonds depuis un client mobile</h5>
+                  <p><Icon name="arrow down" size="big" /></p>
+                  <QRCode value={account.address} />
+                    </div>
+                  </Segment>
+                }
+                  
+                  
+                  on='click'
+                  pinned
+                  trigger={
+                    <Button
+                      basic
+                      circular
+                      compact
+                      size="mini"
+                      color="green"
+                      icon="qrcode"
+                    />
+                  } />
+
                 </Table.Cell>
                 <Table.Cell width={3}>
                   {balances &&

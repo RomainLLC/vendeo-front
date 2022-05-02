@@ -22,6 +22,8 @@ import NodeInfo from './components/NodeInfo'
 import Transfer from './components/Transfer'
 // import Upgrade from './components/Upgrade'
 import NftCollections from './components/NftCollections'
+import NftExplorer from './components/NftExplorer'
+import CreateCollection from './components/nft/CreateCollection'
 
 function Main() {
   const { apiState, apiError, keyringState } = useSubstrateState()
@@ -94,8 +96,12 @@ function Main() {
           </Grid.Row>
           <Grid.Row>
             <NftCollections />
+            <NftExplorer />
           </Grid.Row>
-
+          <Grid.Row stretched>
+          <CreateCollection />
+          </Grid.Row>
+          
           </Grid>
         </Container>
         <DeveloperConsole />

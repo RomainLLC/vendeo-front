@@ -26,7 +26,7 @@ export default function Main(props) {
 
   return (
     <Grid.Column width={8}>
-      <h1>Virement</h1>
+      <h1>Faire un virement</h1>
       <Form>
 
         <Form.Field>
